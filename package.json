@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "falconforgecli": "./build/app.js"
+    "falcon": "./build/app.js"
   },
   "keywords": [
     "cli",
@@ -22,10 +22,13 @@
   "author": "Gopal Khichar",
   "license": "ISC",
   "dependencies": {
-    "@clack/prompts": "^0.7.0"
+    "@clack/prompts": "^0.7.0",
+    "picocolors": "^1.1.1",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
+    "@types/yargs": "^17.0.33",
     "typescript": "^5.6.3"
   }
 }
