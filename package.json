@@ -2,14 +2,13 @@
   "name": "falconforgecli",
   "version": "1.0.4",
   "description": "Falcon forge CLI ",
-  "main": "./build/app.js",
-  "source": "./src/app.ts",
+  "main": "./src/app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "falcon": "./build/app.js"
+    "falcon": "./src/app.js"
   },
   "keywords": [
     "cli",

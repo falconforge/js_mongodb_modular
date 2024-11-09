@@ -4,7 +4,7 @@ import { intro, spinner } from "@clack/prompts";
 import picocolors from "picocolors";
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { delay } from './utils/utils';
+import { delay } from './utils/utils.js';
 
 
 const s = spinner();
