@@ -1,0 +1,22 @@
+{
+  "name": "my-express-js-project",
+  "version": "1.0.0",
+  "description": "Express project with MongoDB and Health Check endpoint",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "mongoose": "^7.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
