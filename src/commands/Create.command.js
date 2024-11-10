@@ -91,8 +91,7 @@ export const CreateHandler = async (argv) => {
 
     s.start("Let me get that all mixed 😜 and pour you a greatest of all time cocktail 🍹...");
     let generatedProject = await CreateProject(argv.project_name, selectLanguage, selectDatabase, selectArchitecture, selectPrettier, selectESLint);
-    console.log(generatedProject);
-    await delay(4000);
+    await delay(2000);
     s.stop("Here is your Perfectly Crafted Cocktail 🥹");
     outro("We will call it "+picocolors.bgCyanBright(`${picocolors.blackBright(argv.project_name)}`)+" 😎")
   } catch (error) {

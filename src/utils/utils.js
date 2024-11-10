@@ -7,7 +7,7 @@ export const copyTemplateFolder = async (cli, template, destination) => {
   try {
     // 1. Get the global install path of the CLI by running `npm list -g`
     const globalCLIPath = await getGlobalCLIPath(cli);
-    console.log(globalCLIPath);
+    // console.log(globalCLIPath);
     if (!globalCLIPath) {
       throw new Error('Global CLI path not found!');
     }
@@ -25,11 +25,12 @@ export const copyTemplateFolder = async (cli, template, destination) => {
     const destinationPath = path.join(currentDirectory, destination);
 
     // 5. Copy the template folder to the destination using fs-extra
-    await fs.copy(templateFolderPath, destinationPath);
+    return await fs.copy(templateFolderPath, destinationPath);
 
-    console.log('Template copied successfully to:', destinationPath);
+    // console.log('Template copied successfully to:', destinationPath);
   } catch (err) {
-    console.error('Error copying the template folder:', err);
+    throw Error(" Error in copy template function" + err);
+    // console.error('Error copying the template folder:', err);
   }
 };
 
@@ -37,12 +38,12 @@ export const copyTemplateFolder = async (cli, template, destination) => {
 const getGlobalCLIPath = (cli) => {
     return new Promise((resolve, reject) => {
       exec(`npm ls -g ${cli} -p`, (error, stdout, stderr) => {
-        console.log({error, stderr, stdout})
+        // console.log({error, stderr, stdout})
         if (error || stderr) {
           reject(`Error finding global CLI path: ${stderr || error.message}`);
         } else {
           if (stdout) {
-            console.log(`Found local symlink for ${cli}: ${stdout}`);
+            // console.log(`Found local symlink for ${cli}: ${stdout}`);
             resolve(stdout.trim()); // Return the local path if symlinked
           } else {
             reject('CLI not found in global node_modules');

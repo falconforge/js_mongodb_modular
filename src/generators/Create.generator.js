@@ -4,7 +4,6 @@ export const CreateProject = async(projectName, language, database, architecture
         let fetchFrom = `src/templates/${language}/${database}/${architecture}`;
         let copyAt = `${process.cwd()}/${projectName}`;
         let projectCreated = await copyTemplateFolder('falconforgecli', fetchFrom, projectName);
-        console.log(projectCreated);
         return projectCreated;
     } catch (error) {
         throw Error("Error in Create Project generator" + error);
