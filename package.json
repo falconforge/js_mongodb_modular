@@ -1,6 +1,6 @@
 {
   "name": "falconforgecli",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Falcon forge CLI ",
   "main": "./src/app.js",
   "type": "module",
