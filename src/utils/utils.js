@@ -36,7 +36,7 @@ export const copyTemplateFolder = async (cli, template, destination) => {
 // Function to get the global path of the CLI using `npm list -g`
 const getGlobalCLIPath = (cli) => {
     return new Promise((resolve, reject) => {
-      exec(`npm ls ${cli} -p`, (error, stdout, stderr) => {
+      exec(`npm ls -g ${cli} -p`, (error, stdout, stderr) => {
         console.log({error, stderr, stdout})
         if (error || stderr) {
           reject(`Error finding global CLI path: ${stderr || error.message}`);
