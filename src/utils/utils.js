@@ -13,10 +13,7 @@ export const copyTemplateFolder = async (cli, template, destination) => {
     }
 
     // 2. Define the template folder's relative path inside the global package
-    const templateFolderPath = path.join(
-      globalCLIPath,
-      template
-    );
+    const templateFolderPath = path.join(globalCLIPath, template);
 
     // 3. Define the destination (current directory where the user fired the command)
     const currentDirectory = process.cwd();
@@ -29,30 +26,51 @@ export const copyTemplateFolder = async (cli, template, destination) => {
 
     // console.log('Template copied successfully to:', destinationPath);
   } catch (err) {
-    throw Error(" Error in copy template function" + err);
+    throw Error(' Error in copy template function' + err);
     // console.error('Error copying the template folder:', err);
   }
 };
 
 // Function to get the global path of the CLI using `npm list -g`
 const getGlobalCLIPath = (cli) => {
-    return new Promise((resolve, reject) => {
-      exec(`npm ls -g ${cli} -p`, (error, stdout, stderr) => {
-        // console.log({error, stderr, stdout})
-        if (error || stderr) {
-          reject(`Error finding global CLI path: ${stderr || error.message}`);
+  return new Promise((resolve, reject) => {
+    exec(`npm ls -g ${cli} -p`, (error, stdout, stderr) => {
+      // console.log({error, stderr, stdout})
+      if (error || stderr) {
+        reject(`Error finding global CLI path: ${stderr || error.message}`);
+      } else {
+        if (stdout) {
+          // console.log(`Found local symlink for ${cli}: ${stdout}`);
+          resolve(stdout.trim()); // Return the local path if symlinked
         } else {
-          if (stdout) {
-            // console.log(`Found local symlink for ${cli}: ${stdout}`);
-            resolve(stdout.trim()); // Return the local path if symlinked
-          } else {
-            reject('CLI not found in global node_modules');
-          }
+          reject('CLI not found in global node_modules');
         }
-      });
+      }
     });
-  };
+  });
+};
 
 export const delay = (time) => {
   return new Promise((resolve) => setTimeout(resolve, time));
+};
+
+export const CloneRepository = async (repoUrl, destinationDir) => {
+  try {
+    const targetPath = path.resolve(process.cwd(), destinationDir);
+    console.log(`\tCloning repository from ${repoUrl} into ${targetPath}`);
+
+    return new Promise((resolve, reject) => {
+      exec(`git clone ${repoUrl} ${targetPath}`, (error, stdout, stderr) => {
+        if (error) {
+          reject({ success: false, error: `Error: ${error.message}`});
+        } else if (stderr) {
+          resolve({ success: true, error: stderr });
+        } else {
+          resolve({ success: true, error: stdout });
+        }
+      });
+    });
+  } catch (error) {
+    throw Error(error);
+  }
 };

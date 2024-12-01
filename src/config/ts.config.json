@@ -1,5 +1,0 @@
-{
-    "architecture": {
-        "modular": "./src/templates/TypeScript/Modular"
-    }
-}

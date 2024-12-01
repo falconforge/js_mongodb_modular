@@ -1,10 +1,12 @@
-import { copyTemplateFolder } from "../utils/utils.js";
+import { CloneRepository } from "../utils/utils.js";
+import { clones } from '../config/clones.js';
+
 export const CreateProject = async(projectName, language, database, architecture, prettier, eslint) => {
     try {
-        let fetchFrom = `src/templates/${language}/${database}/${architecture}`;
+        let repoURL = clones[language][database][architecture];
         let copyAt = `${process.cwd()}/${projectName}`;
-        let projectCreated = await copyTemplateFolder('falconforgecli', fetchFrom, projectName);
-        return projectCreated;
+        let project = await CloneRepository(repoURL, copyAt);
+        return project;
     } catch (error) {
         throw Error("Error in Create Project generator" + error);
     }

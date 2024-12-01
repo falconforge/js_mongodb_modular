@@ -32,6 +32,20 @@ export const CreateHandler = async (argv) => {
             }
         ]
     });
+    
+    let selectDatabase = await select({
+        message: "Please select database for your project!",
+        options: [
+            {
+                value: "mysql",
+                label: "MySQL"
+            },
+            {
+                value: "mongodb",
+                label: "MongoDB"
+            }
+        ]
+    });
 
     let selectArchitecture = await select({
         message: "Please select your code base architecture!",
@@ -46,20 +60,6 @@ export const CreateHandler = async (argv) => {
             }
         ]
     }); 
-
-    let selectDatabase = await select({
-        message: "Please select database for your project!",
-        options: [
-            {
-                value: "mysql",
-                label: "MySQL"
-            },
-            {
-                value: "mongo",
-                label: "MongoDB"
-            }
-        ]
-    });
 
     let selectPrettier = await select({
         message: "Should we include Prettier?",
@@ -91,9 +91,13 @@ export const CreateHandler = async (argv) => {
 
     s.start("Let me get that all mixed 😜 and pour you a greatest of all time cocktail 🍹...");
     let generatedProject = await CreateProject(argv.project_name, selectLanguage, selectDatabase, selectArchitecture, selectPrettier, selectESLint);
-    await delay(2000);
-    s.stop("Here is your Perfectly Crafted Cocktail 🥹");
-    outro("We will call it "+picocolors.bgCyanBright(`${picocolors.blackBright(argv.project_name)}`)+" 😎")
+    if(generatedProject?.success){
+        s.stop("Here is your Perfectly Crafted Cocktail 🥹");
+        outro("We will call it "+picocolors.bgCyanBright(`${picocolors.blackBright(argv.project_name)}`)+" 😎")
+    } else {
+        s.stop("Sorry, we encountered some error.");
+        outro(picocolors.bgCyanBright(`${picocolors.blackBright("Please try again.")}`));
+    }
   } catch (error) {
     throw Error('Error in Create Handler' + error);
   }
